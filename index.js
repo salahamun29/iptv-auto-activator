@@ -62,6 +62,7 @@ const main = async() => {
                 simpleLog(msgActivaste);
                 setTimeout(main, 1000*60*60);
             }
+            //TODO
             else {
                 console.log('Creo que banearon, revisa el html');
                 simpleLog('Creo que banearon, revisa el html');
