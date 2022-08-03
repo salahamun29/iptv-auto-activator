@@ -32,7 +32,7 @@ const main = async() => {
                     'User-Agent': ua,
                     "Referer": "https://sv.spliktv.xyz/activar",
                     "Origin": "https://sv.spliktv.xyz",
-                    "Content-Length": data.toString().length.toString()
+                    "Content-Length": Buffer.byteLength(data.toString())
                 },
             });
             const body2 = r.data.toLowerCase();
