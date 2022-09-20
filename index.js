@@ -8,6 +8,7 @@ const ua = 'Mozilla/5.0 (Linux; Android 10; SM-G960U) AppleWebKit/537.36 (KHTML,
 
 const simpleLog = (message) => {
     const fecha = new Date().toLocaleString('en-US').replace(/,/, '');
+    console.log(`[${fecha}]: ${message}`);
     stream.write(`[${fecha}]: ${message}\n`);
 }
 
@@ -28,8 +29,7 @@ const main = async() => {
         const msgActivaste = $('#success').first().text().length > 0 ? $('#success').first().text() : null;
         const msgHora = $('.info').first().text().length > 0 ? $('.info').first().text() : null;
         if (!(msgActivaste || msgHora)) {
-            const id = html.substring(html.indexOf(".setAttribute('name', '")+".setAttribute('name', '".length, html.indexOf("');"));
-            console.log(`ID es: ${id}, activando...`);
+            const id = $('input[id="bt_rrt"]').attr('name');
             simpleLog(`ID es: ${id}, activando...`);
             const data = new url.URLSearchParams({
                 btn_veri: 'yes1',
@@ -41,11 +41,10 @@ const main = async() => {
                 url: 'https://sv.spliktv.xyz/activar',
                 data: data.toString(),
                 headers: {
-                    "Content-Type": "application/x-www-form-urlencoded",
+                    'Content-Type': 'application/x-www-form-urlencoded',
                     'User-Agent': ua,
-                    "Referer": "https://sv.spliktv.xyz/activar",
-                    "Origin": "https://sv.spliktv.xyz",
-                    "Content-Length": Buffer.byteLength(data.toString())
+                    'Referer': 'https://sv.spliktv.xyz/activar',
+                    'Origin': 'https://sv.spliktv.xyz'
                 }
             });
             html = res.data;
@@ -53,33 +52,27 @@ const main = async() => {
             const msgActivaste = $('#success').first().text().length > 0 ? $('#success').first().text() : null;
             if (msgActivaste === 'Error!') {
                 const msgInfo = $('#info').first().text().length > 0 ? $('#info').first().text() : null;
-                console.log(`${msgActivaste} ${msgInfo}`);
                 simpleLog(`${msgActivaste} ${msgInfo}`);
                 setTimeout(main, 5000);
             }
             else if (msgActivaste === 'Activado!') {
-                console.log(msgActivaste);
                 simpleLog(msgActivaste);
                 setTimeout(main, 1000*60*60);
             }
-            //TODO
             else {
-                console.log('Creo que banearon, revisa el html');
                 simpleLog('Creo que banearon, revisa el html');
                 await fs.promises.writeFile('ban.html', html, 'utf8');
-                return;
+                process.exit(0);
             }
         }
         else {
-            console.log(`${msgActivaste} ${msgHora}`);
             simpleLog(`${msgActivaste} ${msgHora}`);
             setTimeout(main, 1000*60*60);
         }
     }
     catch (e) {
-        console.error(e);
-        simpleLog(e.message);
-        setTimeout(main, 5000);
+        simpleLog(JSON.stringify(e));
+        process.exit(0);
     }
 
 }
