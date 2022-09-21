@@ -18,6 +18,7 @@ git clone https://github.com/xfrcc/iptv-auto-activator.git
 
 ```
 node .
+Edit config.json if you don't want to auto activate specific app
 ```
 
 ## License
