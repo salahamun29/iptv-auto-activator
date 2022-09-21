@@ -1,14 +1,28 @@
 {
-  "name": "spliktv-activator",
+  "name": "iptv-auto-activator",
   "version": "1.0.0",
-  "description": "Activate SplikTV",
+  "description": "An auto activator for various IPTV Apps",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xfrcc/iptv-auto-activator.git"
+  },
+  "keywords": [
+    "iptv",
+    "auto",
+    "enable",
+    "activate",
+    "activator"
+  ],
   "author": "xfrcc",
-  "license": "ISC",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/xfrcc/iptv-auto-activator/issues"
+  },
+  "homepage": "https://github.com/xfrcc/iptv-auto-activator#readme",
   "dependencies": {
     "axios": "^0.27.2",
     "cheerio": "^1.0.0-rc.12"
